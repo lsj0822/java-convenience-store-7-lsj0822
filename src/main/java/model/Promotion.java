@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Promotion {
     String name;
@@ -9,8 +10,12 @@ public class Promotion {
     LocalDate startDate;
     LocalDate endDate;
 
-    public Promotion(String name) {
-        this.name = name;
+    public Promotion(List<String> information) {
+        this.name = information.get(0);
+        this.buy = Integer.parseInt(information.get(1));
+        this.get = Integer.parseInt(information.get(2));
+        this.startDate = LocalDate.parse(information.get(3));
+        this.endDate = LocalDate.parse(information.get(4));
     }
 
     public String getName() {

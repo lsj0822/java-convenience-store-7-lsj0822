@@ -8,7 +8,7 @@ import validator.QueryType;
 import validator.Validation;
 
 public class ShoppingList {
-    private ArrayList<ShoppingItem> shoppingItems = new ArrayList<>();
+    private static ArrayList<ShoppingItem> shoppingItems = new ArrayList<>();
 
     public ShoppingList(List<String> queries) {
         initiateShoppingList(queries);
@@ -63,7 +63,7 @@ public class ShoppingList {
         }
     }
 
-    public ArrayList<String> printShoppingItems() {
+    public static ArrayList<String> printShoppingItems() {
         ArrayList<String> printedItems = new ArrayList<>();
         for (ShoppingItem shoppingItem : shoppingItems) {
             printedItems.add(shoppingItem.printItemStatus());

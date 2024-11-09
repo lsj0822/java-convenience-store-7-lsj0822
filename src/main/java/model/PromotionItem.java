@@ -13,7 +13,7 @@ public class PromotionItem implements ShoppingItem {
         itemName = information.get(0);
         price = Integer.parseInt(information.get(1));
         promotionQuantity = Integer.parseInt(information.get(2));
-        promotion = new Promotion(information.get(3));
+        promotion = PromotionList.returnPromotion(information.get(3));
     }
 
     @Override
