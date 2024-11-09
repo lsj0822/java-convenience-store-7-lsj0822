@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Validation {
     public static void ValidateContentLength(List<String> query, QueryType type) {
-        if (query.size() == type.getQueryLength()) {
+        if (query.size() != type.getQueryLength()) {
             throw new IllegalArgumentException("[ERROR] 입력된 리소스 파일의 형식이 맞지 않습니다.");
         }
     }

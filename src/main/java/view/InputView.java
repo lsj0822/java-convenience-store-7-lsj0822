@@ -10,11 +10,11 @@ import java.util.List;
 public class InputView {
 
     public static List<String> readFile(String fileAddress) {
-        try{
+        try {
             FileReader reader = new FileReader(fileAddress);
             BufferedReader bufferedReader = new BufferedReader(reader);
             return readFileToGroup(bufferedReader);
-        }catch(IOException exception){
+        } catch (IOException exception) {
             OutputView.printErrorMessage(exception);
         }
         return null;
@@ -22,29 +22,29 @@ public class InputView {
 
     private static List<String> readFileToGroup(BufferedReader reader) throws IOException {
         List<String> returnedList = new ArrayList<>();
-        String line;
-        while((line = reader.readLine()) != null){
+        String line = reader.readLine();
+        while ((line = reader.readLine()) != null) {
             returnedList.add(line);
         }
         return returnedList;
     }
 
-    public String inputItemsQuery(){
+    public String inputItemsQuery() {
         OutputView.printMessage(Messages.INPUT_ITEMS_QUERY);
         return Console.readLine();
     }
 
-    public String inputAskPromotion(String itemName){
+    public String inputAskPromotion(String itemName) {
         OutputView.printPromotionMessage(itemName);
         return Console.readLine();
     }
 
-    public String inputAskLackOfItem(String itemName, int quantity){
+    public String inputAskLackOfItem(String itemName, int quantity) {
         OutputView.printLackOfItemMessage(itemName, quantity);
         return Console.readLine();
     }
 
-    public String inputAskCommon(Messages message){
+    public String inputAskCommon(Messages message) {
         OutputView.printMessage(message);
         return Console.readLine();
     }
