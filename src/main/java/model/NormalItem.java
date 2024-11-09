@@ -13,19 +13,50 @@ public class NormalItem implements ShoppingItem {
         quantity = Integer.parseInt(information.get(2));
     }
 
+    @Override
     public String getItemName() {
         return itemName;
     }
 
-    public String toString() {
-        return itemName + "|" + price;
+    @Override
+    public Integer getPrice() {
+        return price;
     }
 
-    public boolean equals(String itemName, Integer price) {
-        return this.itemName.equals(itemName) && this.price.equals(price);
+    @Override
+    public Promotion getPromotion() {
+        return null;
     }
 
-    public void addQuantity(int quantity) {
+    @Override
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public boolean equals(ShoppingItem item) {
+        if (item instanceof NormalItem) {
+            return this.itemName.equals(item.getItemName()) &&
+                    this.price.equals(item.getPrice());
+        }
+        return false;
+    }
+
+    @Override
+    public void addNormalQuantity(Integer quantity) {
         this.quantity += quantity;
+    }
+
+    @Override
+    public void addPromotionQuantity(Integer quantity) {
+        return;
+    }
+
+    @Override
+    public String printItemStatus() {
+        if (quantity != 0) {
+            return String.format("- %s %,d원 %,d개", itemName, price, quantity);
+        }
+        return String.format("- %s %,d원 재고 없음", itemName, price);
     }
 }
