@@ -13,9 +13,9 @@ public interface ShoppingItem {
 
     public abstract boolean equals(ShoppingItem item);
 
-    public abstract void addNormalQuantity(Integer normalQuantity);
+    public abstract void modifyNormalQuantity(Integer normalQuantity);
 
-    public abstract void addPromotionQuantity(Integer promotionQuantity);
+    public abstract void modifyPromotionQuantity(Integer promotionQuantity);
 
     public abstract String printItemStatus();
 

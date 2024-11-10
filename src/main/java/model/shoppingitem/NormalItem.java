@@ -44,12 +44,12 @@ public class NormalItem implements ShoppingItem {
     }
 
     @Override
-    public void addNormalQuantity(Integer quantity) {
+    public void modifyNormalQuantity(Integer quantity) {
         this.quantity += quantity;
     }
 
     @Override
-    public void addPromotionQuantity(Integer quantity) {
+    public void modifyPromotionQuantity(Integer quantity) {
         return;
     }
 

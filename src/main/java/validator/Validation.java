@@ -74,4 +74,14 @@ public class Validation {
             throw new IllegalArgumentException(ErrorMessages.ERROR_QUANTITY_EXCEED_LIMITATION.getMessage());
         }
     }
+
+    public static boolean ValidateUserSelection(String query) {
+        if (query.startsWith("Y")) {
+            return true;
+        }
+        if (query.startsWith("N")) {
+            return false;
+        }
+        throw new IllegalArgumentException(ErrorMessages.ERROR_ETC.getMessage());
+    }
 }

@@ -60,12 +60,12 @@ public class PromotionItem implements ShoppingItem {
     }
 
     @Override
-    public void addNormalQuantity(Integer normalQuantity) {
+    public void modifyNormalQuantity(Integer normalQuantity) {
         this.normalQuantity = this.normalQuantity + normalQuantity;
     }
 
     @Override
-    public void addPromotionQuantity(Integer promotionQuantity) {
+    public void modifyPromotionQuantity(Integer promotionQuantity) {
         this.promotionQuantity += promotionQuantity;
     }
 

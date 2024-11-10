@@ -72,10 +72,10 @@ public class ShoppingList {
     public void addItemToExisted(ShoppingItem shoppingItem, ShoppingItem addItem) {
         Integer quantity = addItem.getQuantity();
         if (addItem instanceof NormalItem) {
-            shoppingItem.addNormalQuantity(quantity);
+            shoppingItem.modifyNormalQuantity(quantity);
         }
         if (addItem instanceof PromotionItem) {
-            shoppingItem.addPromotionQuantity(quantity);
+            shoppingItem.modifyPromotionQuantity(quantity);
         }
     }
 
