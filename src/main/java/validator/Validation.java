@@ -2,11 +2,17 @@ package validator;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.regex.Pattern;
+import model.ShoppingList;
+import model.shoppingitem.ShoppingItem;
+import view.ErrorMessages;
 
 public class Validation {
+    static final String ITEM_QUERY_REGEX = "\\[.+-\\d+\\]";
+
     public static void ValidateContentLength(List<String> query, QueryType type) {
         if (query.size() != type.getQueryLength()) {
-            throw new IllegalArgumentException("[ERROR] 입력된 리소스 파일의 형식이 맞지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessages.ERROR_INVALID_RESOURCE_FORMAT.getMessage());
         }
     }
 
@@ -33,7 +39,7 @@ public class Validation {
         try {
             Integer.parseInt(content);
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("[ERROR] 입력된 리소스 파일의 형식이 맞지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessages.ERROR_INVALID_RESOURCE_FORMAT.getMessage());
         }
     }
 
@@ -41,7 +47,31 @@ public class Validation {
         try {
             LocalDate.parse(content);
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("[ERROR] 입력된 리소스 파일의 형식이 맞지 않습니다.");
+            throw new IllegalArgumentException(ErrorMessages.ERROR_INVALID_RESOURCE_FORMAT.getMessage());
+        }
+    }
+
+    public static void ValidateItemsQuery(List<String> queries) {
+        for (String query : queries) {
+            ValidateSingleQuery(query);
+        }
+    }
+
+    private static void ValidateSingleQuery(String query) {
+        if (!Pattern.matches(ITEM_QUERY_REGEX, query)) {
+            throw new IllegalArgumentException(ErrorMessages.ERROR_INVALID_FORMAT.getMessage());
+        }
+    }
+
+    public static void ValidateInShoppingList(String itemName) {
+        if (ShoppingList.findShoppingItem(itemName) == null) {
+            throw new IllegalArgumentException(ErrorMessages.ERROR_INVALID_ITEM.getMessage());
+        }
+    }
+
+    public static void ValidateBuyQuantity(ShoppingItem item, Integer buyQuantity) {
+        if (item.getQuantity() < buyQuantity) {
+            throw new IllegalArgumentException(ErrorMessages.ERROR_QUANTITY_EXCEED_LIMITATION.getMessage());
         }
     }
 }
