@@ -29,22 +29,22 @@ public class InputView {
         return returnedList;
     }
 
-    public String inputItemsQuery() {
+    public static String inputItemsQuery() {
         OutputView.printMessage(Messages.INPUT_ITEMS_QUERY);
         return Console.readLine();
     }
 
-    public String inputAskPromotion(String itemName) {
+    public static String inputAskPromotion(String itemName) {
         OutputView.printPromotionMessage(itemName);
         return Console.readLine();
     }
 
-    public String inputAskLackOfItem(String itemName, int quantity) {
+    public static String inputAskLackOfItem(String itemName, int quantity) {
         OutputView.printLackOfItemMessage(itemName, quantity);
         return Console.readLine();
     }
 
-    public String inputAskCommon(Messages message) {
+    public static String inputAskCommon(Messages message) {
         OutputView.printMessage(message);
         return Console.readLine();
     }

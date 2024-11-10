@@ -1,6 +1,10 @@
-package model;
+package model.shoppingitem;
 
+import java.time.LocalDate;
 import java.util.List;
+import model.Promotion;
+import model.PromotionList;
+import utils.CompareDate;
 
 public class PromotionItem implements ShoppingItem {
     private String itemName;
@@ -33,6 +37,13 @@ public class PromotionItem implements ShoppingItem {
 
     @Override
     public Integer getQuantity() {
+        if (CompareDate.compareBetween(promotion.getStartDate(), promotion.getEndDate())) {
+            return promotionQuantity + normalQuantity;
+        }
+        return normalQuantity;
+    }
+
+    public Integer getPromotionQuantity() {
         return promotionQuantity;
     }
 
@@ -75,5 +86,12 @@ public class PromotionItem implements ShoppingItem {
             return String.format("- %s %,d원 %,d개", itemName, price, normalQuantity);
         }
         return String.format("- %s %,d원 재고 없음", itemName, price);
+    }
+
+    @Override
+    public boolean checkPromotion() {
+        LocalDate startDate = promotion.getStartDate();
+        LocalDate endDate = promotion.getEndDate();
+        return CompareDate.compareBetween(startDate, endDate);
     }
 }

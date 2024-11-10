@@ -1,4 +1,6 @@
-package model;
+package model.shoppingitem;
+
+import model.Promotion;
 
 public interface ShoppingItem {
     public abstract String getItemName();
@@ -16,4 +18,6 @@ public interface ShoppingItem {
     public abstract void addPromotionQuantity(Integer promotionQuantity);
 
     public abstract String printItemStatus();
+
+    public abstract boolean checkPromotion();
 }

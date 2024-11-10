@@ -1,6 +1,9 @@
 package model;
 
 import java.util.List;
+import model.shoppingitem.NormalItem;
+import model.shoppingitem.PromotionItem;
+import model.shoppingitem.ShoppingItem;
 
 public class ItemFactory {
     public static ShoppingItem generate(List<String> inputInformation) {

@@ -1,6 +1,7 @@
-package model;
+package model.shoppingitem;
 
 import java.util.List;
+import model.Promotion;
 
 public class NormalItem implements ShoppingItem {
     private String itemName;
@@ -58,5 +59,10 @@ public class NormalItem implements ShoppingItem {
             return String.format("- %s %,d원 %,d개", itemName, price, quantity);
         }
         return String.format("- %s %,d원 재고 없음", itemName, price);
+    }
+
+    @Override
+    public boolean checkPromotion() {
+        return false;
     }
 }
