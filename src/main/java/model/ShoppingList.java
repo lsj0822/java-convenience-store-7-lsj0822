@@ -3,6 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import model.shoppingitem.NormalItem;
+import model.shoppingitem.PromotionItem;
+import model.shoppingitem.ShoppingItem;
 import utils.Parser;
 import validator.QueryType;
 import validator.Validation;
@@ -11,7 +14,9 @@ public class ShoppingList {
     private static ArrayList<ShoppingItem> shoppingItems = new ArrayList<>();
 
     public ShoppingList(List<String> queries) {
-        initiateShoppingList(queries);
+        if (shoppingItems.size() == 0) {
+            initiateShoppingList(queries);
+        }
     }
 
     private void initiateShoppingList(List<String> queries) {
@@ -40,8 +45,15 @@ public class ShoppingList {
         return addResult;
     }
 
+    public static ShoppingItem findShoppingItem(String itemName) {
+        return shoppingItems.stream()
+                .filter(item -> isEqualName(item, itemName))
+                .findFirst()
+                .orElse(null);
+    }
+
     public boolean checkSingleShoppingItem(ShoppingItem shoppingItem, ShoppingItem addItem) {
-        boolean equalName = shoppingItem.getItemName().equals(addItem.getItemName());
+        boolean equalName = isEqualName(shoppingItem, addItem.getItemName());
         boolean equalItem = shoppingItem.equals(addItem);
         if (equalName && equalItem) {
             addItemToExisted(shoppingItem, addItem);
@@ -51,6 +63,10 @@ public class ShoppingList {
             throw new IllegalArgumentException("[Error] 이미 존재하는 물품입니다.");
         }
         return false;
+    }
+
+    public static boolean isEqualName(ShoppingItem shoppingItem, String compareName) {
+        return shoppingItem.getItemName().equals(compareName);
     }
 
     public void addItemToExisted(ShoppingItem shoppingItem, ShoppingItem addItem) {
@@ -70,5 +86,6 @@ public class ShoppingList {
         }
         return printedItems;
     }
+
 
 }
