@@ -7,7 +7,6 @@ import model.PromotionList;
 import model.ShoppingList;
 import utils.Parser;
 import validator.Validation;
-import view.ErrorMessages;
 import view.InputView;
 import view.Messages;
 import view.OutputView;
@@ -55,21 +54,35 @@ public class StoreController {
             printReceipt(buyList);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
+            InputItemController();
         }
-        //ShoppingController(inputQuery);
     }
 
     public boolean membershipSetting(String query) {
-        if (query.startsWith("Y")) {
-            return true;
-        }
-        if (query.startsWith("N")) {
-            return false;
-        }
-        throw new IllegalArgumentException(ErrorMessages.ERROR_ETC.getMessage());
+        return Validation.ValidateUserSelection(query);
     }
 
     public void printReceipt(BuyList buyList) {
-        System.out.println(buyList.getCartSize());
+        OutputView.printReceipt(buyList);
+        renewShoppinigList(buyList);
+    }
+
+    public void renewShoppinigList(BuyList buyList) {
+        buyList.substractQuantity();
+        replayProgram();
+    }
+
+    public void replayProgram() {
+        try {
+            String query = InputView.inputAskCommon(Messages.INPUT_ASK_BYE_MORE).toUpperCase();
+            boolean result = Validation.ValidateUserSelection(query);
+            if (result) {
+                programController();
+            }
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            replayProgram();
+        }
+
     }
 }
