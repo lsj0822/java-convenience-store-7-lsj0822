@@ -51,12 +51,12 @@ public class OutputView {
 
     private static void printReceiptHeader() {
         printBlank();
-        System.out.println(Messages.RECEIPT_STORE_HEADER.getMessage());
-        System.out.println(Messages.RECEIPT_COLUMN_HEADER.getMessage());
+        System.out.println(ReceiptMessages.STORE_HEADER.getMessage());
+        System.out.println(ReceiptMessages.COLUMN_HEADER.getMessage());
     }
 
     public static void printPromotion(BuyList buyList) {
-        System.out.println(Messages.RECEIPT_PROMOTION_HEADER.getMessage());
+        System.out.println(ReceiptMessages.PROMOTION_HEADER.getMessage());
         printBuyTotalPromotions(buyList);
     }
 
@@ -68,15 +68,17 @@ public class OutputView {
     }
 
     public static void printPriceInformation(BuyList buyList) {
-        System.out.println(Messages.RECEIPT_LINE.getMessage());
+        System.out.println(ReceiptMessages.LINE.getMessage());
         Integer totalQuantity = buyList.toTotalQuantity();
         Integer initialPrice = buyList.toTotalPrice();
         Integer promotedPrice = buyList.toPromotedPrice();
         Integer membershipDiscountPrice = buyList.toMemberShipPrice();
-        Integer finalPrice = initialPrice - promotedPrice - membershipDiscountPrice;
-        System.out.printf("총구매액\t\t%,d\t%,8d\n", totalQuantity, initialPrice);
-        System.out.printf("행사할인\t\t\t%,8d\n", -promotedPrice);
-        System.out.printf("멤버십할인\t\t\t%,8d\n", -membershipDiscountPrice);
-        System.out.printf("내실돈\t\t\t%,8d\n", finalPrice);
+        System.out.printf(ReceiptMessages.TOTAL_QUANTITY_AND_PRICE_FORMAT.getMessage(), totalQuantity, initialPrice);
+        System.out.printf(ReceiptMessages.PROMOTION_PRICE_FORMAT.getMessage(),
+                "-" + String.format("%,d", promotedPrice));
+        System.out.printf(ReceiptMessages.MEMBERSHIP_PRICE_FORMAT.getMessage(),
+                "-" + String.format("%,d", membershipDiscountPrice));
+        System.out.printf(ReceiptMessages.RESULT_FORMAT.getMessage(),
+                initialPrice - promotedPrice - membershipDiscountPrice);
     }
 }
