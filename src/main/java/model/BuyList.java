@@ -9,7 +9,6 @@ public class BuyList {
     private boolean membership;
 
     public BuyList(ArrayList<List<String>> buyItemsReceipt) {
-        this.buyItems = buyItems;
         cartFactory(buyItemsReceipt);
     }
 

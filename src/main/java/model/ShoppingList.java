@@ -14,7 +14,7 @@ public class ShoppingList {
     private static ArrayList<ShoppingItem> shoppingItems = new ArrayList<>();
 
     public ShoppingList(List<String> queries) {
-        if (shoppingItems.size() == 0) {
+        if (shoppingItems.isEmpty()) {
             initiateShoppingList(queries);
         }
     }
@@ -59,7 +59,7 @@ public class ShoppingList {
             addItemToExisted(shoppingItem, addItem);
             return true;
         }
-        if (equalName && !equalItem) {
+        if (equalName) {
             throw new IllegalArgumentException("[Error] 이미 존재하는 물품입니다.");
         }
         return false;
